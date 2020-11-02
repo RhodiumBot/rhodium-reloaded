@@ -1,0 +1,34 @@
+{
+  "name": "rhodium-reloaded",
+  "version": "0.0.0",
+  "description": "A multi-purpose discord bot",
+  "main": "main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "node src/main.js --dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxain/rhodium-reloaded.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "discord",
+    "bot",
+    "database"
+  ],
+  "author": "Voxain",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/voxain/rhodium-reloaded/issues"
+  },
+  "homepage": "https://github.com/voxain/rhodium-reloaded#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "discord.js": "^12.4.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1"
+  }
+}
