@@ -76,13 +76,11 @@ app.use(function(req,res,next){
 // Add routers & define routing paths
 
 client.log.verb('Express: Routers Initializing');
-const indexRouter   = require('./routes/index.js'); // Index and main subpages
-const apiRouter     = require('./routes/api.js');   // routes for the web API /api
-const adminRouter   = require('./routes/admin.js'); // Admin interface routes. Will check for permissions
 
-app.use('/', indexRouter);
-app.use('/api', apiRouter);
-app.use('/admin', adminRouter);
+app.use('/', require('./routes/index.js'));       // Index and main subpages
+app.use('/api', require('./routes/api.js'));    // routes for the web API /api
+app.use('/admin', require('./routes/admin.js'));  // Admin interface routes. Will check for permissions
+app.use('/auth', require('./routes/auth.js'));   // Authorization pages
 
 
 

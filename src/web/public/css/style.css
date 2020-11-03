@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600&family=Open+Sans:wght@400;600&display=swap');
+
+:root{
+    --background-primary: rgb(19, 18, 22);
+
+    --accent: #F6F601;
+
+    --font-head: 'Open Sans';
+    --font-body: 'Epilogue';
+}
+
+body, html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--background-primary);
+    font-family: var(--font-body);
+    font-size: 1em;
+    font-weight: 500;
+    color: white;
+    scroll-behavior: smooth;
+}
+
+a{
+    color: inherit;
+    text-decoration: inherit;
+}
+
+body::-webkit-scrollbar{
+    display: none;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: var(--font-head);
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: .5em;
+}
+h1{ font-size: 4em }
+h2{ font-size: 3.5em }
+h3{ font-size: 3em }
+h4{ font-size: 2.5em }
+h5{ font-size: 2em }
+h6{ font-size: 1.5em }
+
+.footnote{
+    color: #888;
+    font-size: .8em;
+    font-weight: 500;
+}
+
+.stretch{
+    flex: 1;
+}
+
+.centered{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.centered.v{
+    flex-direction: column;
+}
+
+.home-hero{
+    height: calc(100% - 5em);
+    width: 100%;
+    background: var(--background-primary);
+}
+.home-hero.start{
+    height: 100%;
+    background: var(--accent);
+    color: black;
+}
+
+.hero-logo{
+    width: 30vmin;
+}
+
+.wrapper-choosing{
+    width: 13em;
+    height: 19em;
+    background: black;
+    padding: 1em;
+    margin: 1em;
+    transition: .2s ease;
+    cursor: pointer;
+}
+.wrapper-choosing:hover{
+    transform: scale(1.1);
+    text-decoration: underline;
+}
+
+.choosing-image{
+    width: 100%;
+}
+
+.bigbutton{
+    width: 22em;
+    height: 6em;
+    background: var(--accent);
+    color: black;
+    transition: .2s ease;
+    cursor: pointer;
+}
+.bigbutton:hover{
+    transform: scale(1.1);
+    text-decoration: underline;
+}

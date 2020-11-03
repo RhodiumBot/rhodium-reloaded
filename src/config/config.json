@@ -14,7 +14,7 @@
     },
 
     "oauth": {
-        "redirect_URI": "https://localhost/",
+        "oauthURL": "https://localhost/",
         "clientID": "clientIDHERE",
         "clientSecret": "clientSecretHere"
     },

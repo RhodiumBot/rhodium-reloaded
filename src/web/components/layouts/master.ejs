@@ -1,19 +1,12 @@
-<%- include('../partials/header') %>
-MASTER TEMPLATE HEADER ABOVE
-
-<style>
-    html{
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding:0;
-        background: linear-gradient(45deg, rgba(246,246,1,1) 0%, rgba(246,246,1,1) 50%, rgba(28,29,31,1) 50%, rgba(28,29,31,1) 100%);
-        background-size: 300%;
-        animation: switch 2s ease infinite;
-    }
-    @keyframes switch {
-        0%{background-position-x: 0%;}
-        50%{background-position-x: 100%;}
-        100%{background-position-x: 150%;}
-    }
-</style>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <%- include('../partials/header/' + header) %>
+        <%- include('../views/' + body) %>
+    </body>
+</html>
