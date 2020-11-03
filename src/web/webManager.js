@@ -66,7 +66,8 @@ app.use(session({
 // Set up routing initialization
 
 app.use(function(req,res,next){
-  client.log.verb('Express: request received');
+  client.log.verb('Express: Request received');
+  client.log.verb(`Express: Serving request ${req.url} to ${ req.ip }`);
   // NOTE: Use res.locals here to get session data into views
   next();
 });

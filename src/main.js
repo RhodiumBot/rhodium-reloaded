@@ -41,9 +41,9 @@ client.devEnv = process.argv[2] === '--dev';
 client.log = {
     verb:   str => { 
         if( !client.devEnv ) return;
-        console.log('[VERB] '.green + str) 
+        console.log('[VERB] ' + str); 
     },
-    log:    str => { console.log('[LOG]  ' + str) },
+    log:    str => { console.log('[LOG]  '.green + str) },
     info:   str => { console.log('[INFO] '.blue + str) },
     warn:   str => { console.log('[WARN] '.yellow + str) },
     err:    str => { console.log('[ERR]  '.red + str) }
@@ -57,6 +57,7 @@ client.config = require( `./config/${ client.devEnv ? 'dev' : '' }config.json` )
 
 // Parse and bind event handlers
 
+client.log.verb('Parsing events from src/events');
 fs.readdirSync('./src/events').forEach( eventFile => {
     if( !eventFile.endsWith('.js') ) return client.log.warn('File loading skipped (invalid file type): ' + eventFile);
 
