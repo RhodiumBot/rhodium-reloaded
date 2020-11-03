@@ -1,0 +1,27 @@
+{
+    "token": "NTA5MDMzNDc5MTA4MDM0NTYw.W-BoXg.YIOkRqNXuzvXiwPs31jf5pVRS-E",
+    "database": {
+        "url": "127.0.0.1",
+        "port": 3306,
+        "name": "myDatabase",
+        "user": "databaseUser",
+        "password": "securePassword"
+    },
+
+    "webinterface": {
+        "localAddress": "127.0.0.1",
+        "port": 1337
+    },
+
+    "oauth": {
+        "redirect_URI": "https://localhost/",
+        "clientID": "clientIDHERE",
+        "clientSecret": "clientSecretHere"
+    },
+    "bot": {
+        "developers": [
+            "Discord IDs of",
+            "developers go here"
+        ]
+    }
+}

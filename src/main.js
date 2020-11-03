@@ -70,3 +70,8 @@ fs.readdirSync('./src/events').forEach( eventFile => {
 // Connect to Discord and log in
 
 client.login( client.config.token );
+
+
+// Make client available for other files
+
+module.exports = client;
