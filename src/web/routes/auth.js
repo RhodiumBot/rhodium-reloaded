@@ -1,10 +1,67 @@
 const express = require('express');
+const centra  = require('@aero/centra');
 const router  = express.Router();
+const config  = require('./../../main.js').config;
 
-router.get('/login', function(req, res, next) {
-    let client = require('./../../main.js');
-    if(req.session.loggedIn) return res.redirect('/guilds');
-    res.render('layouts/master', { body: 'auth/login', header: 'empty', link: client.config.oauth.oauthURL });
+router.get('/login', (req, res) => {
+    if(req.session.loggedIn) {
+        // TODO: add proper check and redirect to /guilds
+        let data = req.session.data;
+        res.render('layouts/master', {
+            header: 'empty',
+            body: 'error',
+            title: 'Authorization success.',
+            description: 'Welcome, ' + data.username + data.discriminator
+        });
+    }
+    res.render('layouts/master', { body: 'auth/login', header: 'empty', client_id: config.oauth.clientID, redirect_uri: config.oauth.redirectURI });
+});
+
+router.get('/discord', (req, res) => {
+    centra('https://discord.com/api/oauth2/token', 'POST').body({
+        'client_id': config.oauth.clientID,
+        'client_secret': config.oauth.clientSecret,
+        'grant_type': 'authorization_code',
+        'code': req.query.code,
+        'redirect_uri': config.oauth.redirectURI,
+        'scope': 'identify guilds'
+    }, 'form').header('Content-Type', 'application/x-www-form-urlencoded').send().then(token => {
+        if(token.statusCode === 200){
+            token = JSON.parse(token.body.toString());
+
+            centra('https://discord.com/api/users/@me')
+            .header('authorization', token.token_type + ' ' + token.access_token)
+            .send().then(userdata => {
+                if(userdata.statusCode === 200){
+                    // TODO: Leftoff here
+                    let data = JSON.parse(userdata.body.toString());
+
+                    req.session.loggedIn = true;
+                    req.session.data = data;
+
+                    console.log(data);
+                    return res.render('layouts/master', {
+                        header: 'empty',
+                        body: 'error',
+                        title: 'Authorization success.',
+                        description: 'Welcome, ' + data.username + data.discriminator
+                    });
+                }
+                else return res.render('layouts/master', {
+                    header: 'empty',
+                    body: 'error',
+                    title: 'Authorization failed.',
+                    description: 'Discord didn\'t return Any user data. Please try again.'
+                });
+            });
+        }
+        else return res.render('layouts/master', {
+            header: 'empty',
+            body: 'error',
+            title: 'Authorization failed.',
+            description: 'Discord didn\'t return a token for the authorization flow. Please try again.'
+        });
+    });
 });
 
 module.exports = router;
