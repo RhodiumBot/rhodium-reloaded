@@ -1,18 +1,12 @@
 const express = require('express');
 const centra  = require('@aero/centra');
+const client = require('../../main.js');
 const router  = express.Router();
 const config  = require('./../../main.js').config;
 
 router.get('/login', (req, res) => {
     if(req.session.loggedIn) {
-        // TODO: add proper check and redirect to /guilds
-        let data = req.session.data;
-        res.render('layouts/master', {
-            header: 'empty',
-            body: 'error',
-            title: 'Authorization success.',
-            description: 'Welcome, ' + data.username + data.discriminator
-        });
+        return res.redirect('/dash/guilds');
     }
     res.render('layouts/master', { body: 'auth/login', header: 'empty', client_id: config.oauth.clientID, redirect_uri: config.oauth.redirectURI });
 });
@@ -39,13 +33,7 @@ router.get('/discord', (req, res) => {
                     req.session.loggedIn = true;
                     req.session.data = data;
 
-                    console.log(data);
-                    return res.render('layouts/master', {
-                        header: 'empty',
-                        body: 'error',
-                        title: 'Authorization success.',
-                        description: 'Welcome, ' + data.username + data.discriminator
-                    });
+                    return res.redirect('/dash/guilds');
                 }
                 else return res.render('layouts/master', {
                     header: 'empty',

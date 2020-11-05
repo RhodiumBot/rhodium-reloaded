@@ -9,6 +9,8 @@
     top: 0;
     left: 0;
     transition: .3s ease;
+    box-sizing: border-box;
+    padding-right: 1em;
 }
 
 .header.scrolled{
@@ -26,7 +28,6 @@
     border-bottom: 2px solid transparent;
     width: auto;
     height: 3em;
-    margin: 2em;
     transition: .1s ease;
     cursor: pointer;
     padding-left: 2em;

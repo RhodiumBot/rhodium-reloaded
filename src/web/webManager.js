@@ -68,7 +68,9 @@ app.use(session({
 app.use(function(req,res,next){
   client.log.verb('Express: Request received');
   client.log.verb(`Express: Serving request ${req.url} to ${ req.ip }`);
-  // NOTE: Use res.locals here to get session data into views
+  if(req.session.loggedIn){
+    res.locals.data = req.session.data;
+  }
   next();
 });
 
@@ -81,6 +83,7 @@ app.use('/', require('./routes/index.js'));       // Index and main subpages
 app.use('/api', require('./routes/api.js'));    // routes for the web API /api
 app.use('/admin', require('./routes/admin.js'));  // Admin interface routes. Will check for permissions
 app.use('/auth', require('./routes/auth.js'));   // Authorization pages
+app.use('/dash', require('./routes/dash.js'));   // Dashboard pages
 
 
 
