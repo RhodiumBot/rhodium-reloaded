@@ -32,6 +32,7 @@ router.get('/discord', (req, res) => {
 
                     req.session.loggedIn = true;
                     req.session.data = data;
+                    req.session.token = token;
 
                     return res.redirect('/dash/guilds');
                 }

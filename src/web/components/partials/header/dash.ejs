@@ -12,6 +12,17 @@
             Guilds
         </div>
     </a>
+    <% if(typeof guild != 'undefined'){ %>
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M7 21L14.9 3H17L9.1 21H7Z" />
+        </svg>
+
+        <a href="/dash/guild/<% guild.id %>">
+            <div class="header-element">
+                <%= guild.name %>
+            </div>
+        </a>
+    <% } %>
 
     <div class="stretch"></div>
 

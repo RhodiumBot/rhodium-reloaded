@@ -1,52 +1,37 @@
 <div class="home-hero padding">
-    THIS IS MOCKUP DATA. The actual menu isn't finished yet.
     <h3>Managed guilds</h3>
-    <section style="display: flex; flex-direction: row;">
-        <div class="dash-guild-thumb">
-            <h5>Rhodium</h5>
-            <img src="/img/editions/server.svg">
-            <div class="btn full accent">
-                Manage
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z" />
-                </svg>
+    <section class="ui-wrapper">
+        <% managed.forEach(guild => { %> 
+            <a href="/dash/guild/<%= guild.id %>">
+            <div class="dash-guild-thumb big">
+                <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>?size=64">
+                <%= guild.name %>
+                <div style="flex: 1"></div>
+                <div class="btn full sq accent">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                    </svg>
+                </div>
             </div>
-            <div class="btn full destructive">
-                Remove
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                </svg>
-            </div>
-        </div>
-        <div class="dash-guild-thumb">
-            <h5>Testshuppen</h5>
-            <img src="/img/editions/developer.svg">
-            <div class="btn full accent">
-                Manage
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z" />
-                </svg>
-            </div>
-            <div class="btn full destructive">
-                Remove
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
-                </svg>
-            </div>
-        </div>
-    </section>
+        </a>
+        <% }) %>
+    </section><br><br><br>
 
     <h3>Other guilds</h3>
-    <section style="display: flex; flex-direction: row;">
-        <div class="dash-guild-thumb">
-            <h5>IKEA</h5>
-            <img src="/img/editions/pilot.svg">
-            <div class="btn full accent">
-                Add
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                </svg>
-            </div>
-        </div>
+    <section class="ui-wrapper"">
+        <% unmanaged.forEach(guild => { %> 
+            <a href="/dash/guild/<%= guild.id %>">
+                <div class="dash-guild-thumb">
+                    <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>?size=64">
+                    <%= guild.name %>
+                    <div style="flex: 1"></div>
+                    <div class="btn full sq accent">
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        <% }) %>
     </section>
 </div>
