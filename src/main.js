@@ -55,6 +55,11 @@ client.log = {
 client.config = require( `./config/${ client.devEnv ? 'dev' : '' }config.json` );
 
 
+// Require Database module
+
+client.db = require( './db.js' );
+
+
 // Parse and bind event handlers
 
 client.log.verb('Parsing events from src/events');

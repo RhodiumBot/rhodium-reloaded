@@ -58,6 +58,10 @@ h6{ font-size: 1.5em }
     justify-content: center;
     margin:1em;
 }
+.btn:hover{
+    background: var(--accent);
+    color: black;
+}
 .btn.fw{
     width: 13em;
     height: 2.5em;
@@ -175,6 +179,10 @@ h6{ font-size: 1.5em }
     white-space: nowrap;
     text-align: left;
     overflow-x:-webkit-marquee;
+}
+.dash-guild-thumb:hover div.btn{
+    background: var(--accent);
+    color: black;
 }
 .dash-guild-thumb.big{
     height: 4em;
