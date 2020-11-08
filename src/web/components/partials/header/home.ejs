@@ -19,11 +19,19 @@
 
     <div class="stretch"></div>
 
-    <a href="/auth/login">
-        <div class="header-element">
-            Login
-        </div>
-    </a>
+    <% if( !loggedIn ) { %>
+        <a href="/auth/login">
+            <div class="header-element">
+                Login
+            </div>
+        </a>
+    <% } else { %>
+        <a href="/dash">
+            <div class="header-element">
+                Open Web
+            </div>
+        </a>
+    <% } %>
 </div>
 
 <script src="/js/header.js"></script>

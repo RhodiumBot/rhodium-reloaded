@@ -9,7 +9,7 @@ module.exports = (sequelize, client) => {
 
     Welcomer.init({
         id: {
-            type: DataTypes.INTEGER, // Yes, this has to be a string
+            type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
@@ -52,21 +52,14 @@ module.exports = (sequelize, client) => {
         }
     });
 
-    client.log.log('Syncing database models');
-
     Guild.hasOne(Welcomer);
 
-    Guild.sync().then(() => {
-        client.log.log('Guild Model database sync success');
+    client.log.log('Syncing database models');
+-
+    sequelize.sync().then(() => {
+        client.log.log('Database sync success');
     }).catch(err => {
-        client.log.err('Guild Model database sync failed');
-        throw err;
-    });
-
-    Welcomer.sync().then(() => {
-        client.log.log('Welcomer Model database sync success');
-    }).catch(err => {
-        client.log.err('Welcomer Model database sync failed');
+        client.log.err('Database sync failed');
         throw err;
     });
 

@@ -17,24 +17,21 @@ router.get(['/', '/guilds'], (req, res) => {
         if(guilds.statusCode === 200){
             let data = await JSON.parse(guilds.body.toString());
 
-            // Parse all Guild IDs into an array
-            
-            let allIDs = [];
-            data.forEach(async (g, i) => {
-                allIDs.push(g.id);
-            });
-
             client.db.models.Guild.findAll({
                 where:{
                     id: {
-                        [Op.or]: allIDs
+                        [Op.or]: data.map(d => d.id) // Get all shared Guilds
                     }
                 }
             }).then(g => {
-                let guildsManaged = [];
+                let guildsManaged = [],
+                    guildsRegistered = [];
 
                 g.forEach(gu => {
-                    guildsManaged.push(client.guilds.resolve(gu.dataValues.id));
+                    if(!client.guilds.resolve(gu.dataValues.id)) return;
+
+                    if(!gu.dataValues.managed) guildsRegistered.push(client.guilds.resolve(gu.dataValues.id));
+                    else guildsManaged.push(client.guilds.resolve(gu.dataValues.id));
                     data = data.filter(o => {
                         return o.id !== gu.id;
                     });
@@ -44,6 +41,7 @@ router.get(['/', '/guilds'], (req, res) => {
                     header: 'dash',
                     body: 'dash/guilds',
                     managed: guildsManaged,
+                    registered: guildsRegistered,
                     unmanaged: data
                 });
             }).catch(err => {
@@ -60,16 +58,31 @@ router.get(['/', '/guilds'], (req, res) => {
 });
 
 router.get('/guild/*', (req, res) => {
-    let guild = client.guilds.cache.get(req.params[0])
-    console.log(guild)
-    if(guild) 
-        return res.render('layouts/master', {
-            header: 'dash',
-            body: 'dash/guild',
-            guild
-        });
+    let guild = client.guilds.resolve(req.params[0]);
     
-    res.render('layouts/master', {
+    if(guild){
+        client.db.models.Guild.findOne({
+            where:{
+                id: guild.id
+            }
+        }).then(db => {
+            return res.render('layouts/master', {
+                header: 'dash',
+                body: 'dash/guild',
+                guild,
+                db
+            });
+        }).catch(err => {
+            res.render('layouts/master', {
+                header: 'empty',
+                body: 'error',
+                title: 'Guild fetch error',
+                description: 'There was an error fetching the data for this guild. Try again later.'
+            });
+        });
+    } 
+
+    else res.render('layouts/master', {
         header: 'empty',
         body: 'error',
         title: 'Guild fetch error',

@@ -68,6 +68,8 @@ app.use(session({
 app.use(function(req,res,next){
   client.log.verb('Express: Request received');
   client.log.verb(`Express: Serving request ${req.url} to ${ req.ip }`);
+  res.locals.loggedIn = req.session.loggedIn;
+  res.locals.clientID = client.user.id;
   if(req.session.loggedIn){
     res.locals.data = req.session.data;
   }

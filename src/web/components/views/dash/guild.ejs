@@ -1,4 +1,43 @@
-<div class="home-hero padding">
-    <h3><%= guild.name %></h3>
-    <span class="footnote"><%= guild.id %></span>
+<div class="home-hero centered padding">
+    <section class="ui-wrapper" style="width: 70%; padding: 0;">
+        <div class="dash-sidebar">
+            <div class="sidebar-header">
+                <img src="https://cdn.discordapp.com/icons/<%= guild.id %>/<%= guild.icon %>?size=64">
+                <h5><%= guild.name %></h5>
+                <span class="footnote"><%= guild.id %></span>
+            </div>
+
+            <div class="sidebar-element selected">
+                General
+                <div style="flex: 1"></div>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                </svg>
+            </div>
+            <div class="sidebar-element">
+                Welcomer
+                <div style="flex: 1"></div>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                </svg>
+            </div>
+            <div class="sidebar-element">
+                Starboard
+                <div style="flex: 1"></div>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                </svg>
+            </div>
+            <div class="sidebar-element">
+                Reminders
+                <div style="flex: 1"></div>
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                </svg>
+            </div>
+        </div>
+        <div class="dash-content">
+            Managed: <input type="checkbox" <%= db.managed ? 'checked' : '' %>>
+        </div>
+    </section>
 </div>
