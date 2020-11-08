@@ -1,7 +1,8 @@
 const express = require('express');
 const centra  = require('@aero/centra');
-const client = require('../../main.js');
+const client  = require('../../main.js');
 const router  = express.Router();
+const { Op }  = require('sequelize');  
 
 router.get('/*', (req, res, next) => {
    if(req.session.loggedIn) return next();
@@ -14,40 +15,40 @@ router.get(['/', '/guilds'], (req, res) => {
     .header('authorization', req.session.token.token_type + ' ' + req.session.token.access_token)
     .send().then(async guilds => {
         if(guilds.statusCode === 200){
-            // TODO: Leftoff here
             let data = await JSON.parse(guilds.body.toString());
 
-            client.db.models.Guild.findOne({
-                where:{
-                    id: '510821805108232193'
-                },
-                include: [{model: client.db.models.Welcomer}]
-            }).then(([g, l]) => {
-                client.log.log('GUILD FOUND ' + g.welcomer)
-            }).catch(err => {
-                client.log.err(err)
-            })
+            // Parse all Guild IDs into an array
+            
+            let allIDs = [];
+            data.forEach(async (g, i) => {
+                allIDs.push(g.id);
+            });
 
-            let guildsManaged = [];
-            /*await data.forEach(async (g, i) => {
-                try{
-                    await client.guilds.fetch(g.id);
-                    if(client.guilds.cache.has(g.id)) {
-                        await guildsManaged.push(g);
-                        data.splice(i, 1);
+            client.db.models.Guild.findAll({
+                where:{
+                    id: {
+                        [Op.or]: allIDs
                     }
                 }
-                catch (err) {
-                    client.log.warn('Guild fetch failed for guild ' + g.id);
-                }
-            });*/
+            }).then(g => {
+                let guildsManaged = [];
 
-            return res.render('layouts/master', {
-                header: 'dash',
-                body: 'dash/guilds',
-                managed: guildsManaged,
-                unmanaged: data
-            });
+                g.forEach(gu => {
+                    guildsManaged.push(client.guilds.resolve(gu.dataValues.id));
+                    data = data.filter(o => {
+                        return o.id !== gu.id;
+                    });
+                });
+
+                return res.render('layouts/master', {
+                    header: 'dash',
+                    body: 'dash/guilds',
+                    managed: guildsManaged,
+                    unmanaged: data
+                });
+            }).catch(err => {
+                client.log.err(err, err)
+            })
         }
         else return res.render('layouts/master', {
             header: 'empty',

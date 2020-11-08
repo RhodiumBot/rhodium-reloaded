@@ -50,7 +50,10 @@ client.log = {
     log:    str => { console.log('[LOG]  '.green + str) },
     info:   str => { console.log('[INFO] '.blue + str) },
     warn:   str => { console.log('[WARN] '.yellow + str) },
-    err:    str => { console.log('[ERR]  '.red + str) }
+    err:    (str, error) => { 
+        console.log('[ERR]  '.red + str);
+        if(error) throw error;
+    }
 };
 
 

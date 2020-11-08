@@ -7,41 +7,11 @@ module.exports = (sequelize, client) => {
 
     client.log.log('Initializing database models');
 
-    Guild.init({
-        id: {
-            type: DataTypes.STRING(18), // Yes, this has to be a string
-            primaryKey: true
-        },
-        managed: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: true
-        }
-    }, {
-        sequelize,
-        modelName : 'Guild',
-        hooks: {
-            afterCreate: (guild, m) => {
-                Welcomer.create({
-                    guildID: guild.id,
-                    enabled: false
-                })
-            }
-        }
-    });
-
     Welcomer.init({
         id: {
             type: DataTypes.INTEGER, // Yes, this has to be a string
             primaryKey: true,
             autoIncrement: true
-        },
-        guildID: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            references: {
-                model: Guild,
-                key: 'id'
-            }
         },
         enabled: {
             type: DataTypes.BOOLEAN,
@@ -60,7 +30,31 @@ module.exports = (sequelize, client) => {
         modelName : 'Welcomer'
     });
 
+    Guild.init({
+        id: {
+            type: DataTypes.STRING(18), // Yes, this has to be a string
+            primaryKey: true
+        },
+        managed: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        }
+    }, {
+        sequelize,
+        modelName : 'Guild',
+        hooks: {
+            afterCreate: (guild, m) => {
+                Welcomer.create({
+                    enabled: true,
+                    GuildId: guild.id
+                });
+            }
+        }
+    });
+
     client.log.log('Syncing database models');
+
+    Guild.hasOne(Welcomer);
 
     Guild.sync().then(() => {
         client.log.log('Guild Model database sync success');
