@@ -1,3 +1,5 @@
 node_modules/
 credentials.txt
 src/config/devconfig.json
+src/config/config.json
+src/config/
