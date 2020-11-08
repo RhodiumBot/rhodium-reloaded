@@ -1,20 +1,32 @@
+const { Sequelize } = require('sequelize');
+
+
 // Setting up the database connection
 
 module.exports = client => {
-    const knex = require('knex')({
-        client: 'mysql',
-        connection: {
-            host     : '127.0.0.1',
-            user     : 'your_database_user',
-            password : 'your_database_password',
-            database : 'myapp_test',
-            charset  : 'utf8'
-        }
-    })
-    const bookshelf = require('bookshelf')(knex)
+    client.log.verb('Initiating DB connection');
     
-    // Defining models
-    const User = bookshelf.model('User', {
-    tableName: 'users'
-    })
+    // Option 2: Passing parameters separately (other dialects)
+    const sequelize = new Sequelize(client.config.database.name, client.config.database.user, client.config.database.password, {
+      host: client.config.database.url,
+      port: client.config.database.port,
+      dialect: 'mysql',
+      logging: log => client.log.db(log)
+    });
+
+    try {
+        sequelize.authenticate().then( () => {
+            client.log.log('Database connection success');
+        });
+    } catch (error) {
+        client.log.err('Database connection failed. See below for details');
+        throw error;
+    }
+
+
+    // Define Models
+
+    require('./models.js')(sequelize, client);
+    
+    return sequelize;
 }

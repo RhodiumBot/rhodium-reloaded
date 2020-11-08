@@ -3,8 +3,8 @@
     "database": {
         "url": "127.0.0.1",
         "port": 3306,
-        "name": "myDatabase",
-        "user": "databaseUser",
+        "name": "dbName",
+        "user": "dbUser",
         "password": "securePassword"
     },
 
@@ -14,9 +14,9 @@
     },
 
     "oauth": {
-        "oauthURL": "https://localhost/",
-        "clientID": "clientIDHERE",
-        "clientSecret": "clientSecretHere"
+        "redirectURI": "http://localhost:1337/auth/discord",
+        "clientID": "ClientID",
+        "clientSecret": "ClientSecret"
     },
     "bot": {
         "developers": [

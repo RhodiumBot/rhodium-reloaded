@@ -17,8 +17,19 @@ router.get(['/', '/guilds'], (req, res) => {
             // TODO: Leftoff here
             let data = await JSON.parse(guilds.body.toString());
 
+            client.db.models.Guild.findOne({
+                where:{
+                    id: '510821805108232193'
+                },
+                include: [{model: client.db.models.Welcomer}]
+            }).then(([g, l]) => {
+                client.log.log('GUILD FOUND ' + g.welcomer)
+            }).catch(err => {
+                client.log.err(err)
+            })
+
             let guildsManaged = [];
-            await data.forEach(async (g, i) => {
+            /*await data.forEach(async (g, i) => {
                 try{
                     await client.guilds.fetch(g.id);
                     if(client.guilds.cache.has(g.id)) {
@@ -29,7 +40,7 @@ router.get(['/', '/guilds'], (req, res) => {
                 catch (err) {
                     client.log.warn('Guild fetch failed for guild ' + g.id);
                 }
-            });
+            });*/
 
             return res.render('layouts/master', {
                 header: 'dash',

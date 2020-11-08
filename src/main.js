@@ -43,6 +43,10 @@ client.log = {
         if( !client.devEnv ) return;
         console.log('[VERB] ' + str); 
     },
+    db:   str => { 
+        if( !client.devEnv ) return;
+        console.log('[DB]   '.magenta + str); 
+    },
     log:    str => { console.log('[LOG]  '.green + str) },
     info:   str => { console.log('[INFO] '.blue + str) },
     warn:   str => { console.log('[WARN] '.yellow + str) },
@@ -57,7 +61,7 @@ client.config = require( `./config/${ client.devEnv ? 'dev' : '' }config.json` )
 
 // Require Database module
 
-client.db = require( './db.js' );
+client.db = require( './db.js' )(client);
 
 
 // Parse and bind event handlers
