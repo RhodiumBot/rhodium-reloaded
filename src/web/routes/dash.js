@@ -57,6 +57,40 @@ router.get(['/', '/guilds'], (req, res) => {
     });
 });
 
+router.get('/guild/*/*', (req, res) => {
+    let guild = client.guilds.resolve(req.params[0]);
+    
+    if(guild){
+        client.db.models.Guild.findOne({
+            where:{
+                id: guild.id
+            }
+        }).then(db => {
+            return res.render('layouts/master', {
+                header: 'dash',
+                body: 'dash/guild',
+                guild,
+                db,
+                settings: req.params[1]
+            });
+        }).catch(err => {
+            res.render('layouts/master', {
+                header: 'empty',
+                body: 'error',
+                title: 'Guild fetch error',
+                description: 'There was an error fetching the data for this guild. Try again later.'
+            });
+        });
+    } 
+
+    else res.render('layouts/master', {
+        header: 'empty',
+        body: 'error',
+        title: 'Guild fetch error',
+        description: 'A guild with this ID could not be found.'
+    });
+});
+
 router.get('/guild/*', (req, res) => {
     let guild = client.guilds.resolve(req.params[0]);
     
@@ -70,7 +104,8 @@ router.get('/guild/*', (req, res) => {
                 header: 'dash',
                 body: 'dash/guild',
                 guild,
-                db
+                db,
+                settings: 'general'
             });
         }).catch(err => {
             res.render('layouts/master', {

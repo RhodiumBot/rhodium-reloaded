@@ -7,37 +7,48 @@
                 <span class="footnote"><%= guild.id %></span>
             </div>
 
-            <div class="sidebar-element selected">
-                General
-                <div style="flex: 1"></div>
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-            </div>
-            <div class="sidebar-element">
-                Welcomer
-                <div style="flex: 1"></div>
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-            </div>
-            <div class="sidebar-element">
-                Starboard
-                <div style="flex: 1"></div>
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-            </div>
-            <div class="sidebar-element">
-                Reminders
-                <div style="flex: 1"></div>
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-            </div>
+            <a href="/dash/guild/<%= guild.id %>">
+                <div class="sidebar-element <%= settings=='general' ? 'selected' : ''%>">
+                    General
+                    <div style="flex: 1"></div>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                    </svg>
+                </div>
+            </a>
+            
+            <a href="/dash/guild/<%= guild.id %>/welcomer">
+                <div class="sidebar-element <%= settings=='welcomer' ? 'selected' : ''%>">
+                    Welcomer
+                    <div style="flex: 1"></div>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                    </svg>
+                </div>
+            </a>
+
+            <a href="/dash/guild/<%= guild.id %>/starboard">
+                <div class="sidebar-element <%= settings=='starboard' ? 'selected' : ''%>">
+                    Starboard
+                    <div style="flex: 1"></div>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                    </svg>
+                </div>
+            </a>
+                
+            <a href="/dash/guild/<%= guild.id %>/reminders">
+                <div class="sidebar-element <%= settings=='reminders' ? 'selected' : ''%>">
+                    Reminders
+                    <div style="flex: 1"></div>
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+                    </svg>
+                </div>
+            </a>
         </div>
         <div class="dash-content">
-            Managed: <input type="checkbox" <%= db.managed ? 'checked' : '' %>>
+            <%- include('../modules/' + settings) %>
         </div>
     </section>
 </div>
