@@ -59,28 +59,50 @@ router.get(['/', '/guilds'], (req, res) => {
 
 router.get('/guild/*/*', (req, res) => {
     let guild = client.guilds.resolve(req.params[0]);
+    let modules = require('../../config/modules.json');
     
     if(guild){
-        client.db.models.Guild.findOne({
-            where:{
-                id: guild.id,
-            },
-            include: client.db.models.Welcomer
-        }).then(db => {
-            return res.render('layouts/master', {
-                header: 'dash',
-                body: 'dash/guild',
-                guild,
-                db,
-                settings: req.params[1]
-            });
-        }).catch(err => {
-            res.render('layouts/master', {
+
+        guild.members.fetch(req.session.data.id).then(member => {
+
+            if(!member) return res.render('layouts/master', {
                 header: 'empty',
                 body: 'error',
-                title: 'Guild fetch error',
-                description: 'There was an error fetching the data for this guild. Try again later.'
+                title: 'Access permission error',
+                description: 'You are not on this guild.'
             });
+    
+            if(!(modules[req.params[1]].permissions === 'NONE' || member.permissions.has(modules[req.params[1]].permissions))) return res.render('layouts/master', {
+                header: 'empty',
+                body: 'error',
+                title: 'Access permission error',
+                description: 'You don\'t have sufficient permissions to access this section.'
+            });
+    
+            client.db.models.Guild.findOne({
+                where:{
+                    id: guild.id,
+                },
+                include: client.db.models.Welcomer
+            }).then(db => {
+                return res.render('layouts/master', {
+                    header: 'dash',
+                    body: 'dash/guild',
+                    guild,
+                    db,
+                    member,
+                    modules,
+                    settings: req.params[1] || 'info'
+                });
+            }).catch(err => {
+                res.render('layouts/master', {
+                    header: 'empty',
+                    body: 'error',
+                    title: 'Guild fetch error',
+                    description: 'There was an error fetching the data for this guild. Try again later.'
+                });
+            });
+
         });
     } 
 
@@ -94,26 +116,40 @@ router.get('/guild/*/*', (req, res) => {
 
 router.get('/guild/*', (req, res) => {
     let guild = client.guilds.resolve(req.params[0]);
+    let modules = require('../../config/modules.json');
     
     if(guild){
-        client.db.models.Guild.findOne({
-            where:{
-                id: guild.id
-            }
-        }).then(db => {
-            return res.render('layouts/master', {
-                header: 'dash',
-                body: 'dash/guild',
-                guild,
-                db,
-                settings: 'info'
-            });
-        }).catch(err => {
-            res.render('layouts/master', {
+        
+        guild.members.fetch(req.session.data.id).then(member => {
+
+            if(!member) return res.render('layouts/master', {
                 header: 'empty',
                 body: 'error',
-                title: 'Guild fetch error',
-                description: 'There was an error fetching the data for this guild. Try again later.'
+                title: 'Access permission error',
+                description: 'You are not on this guild.'
+            });
+
+            client.db.models.Guild.findOne({
+                where:{
+                    id: guild.id
+                }
+            }).then(db => {
+                return res.render('layouts/master', {
+                    header: 'dash',
+                    body: 'dash/guild',
+                    guild,
+                    db,
+                    member,
+                    modules,
+                    settings: 'info'
+                });
+            }).catch(err => {
+                res.render('layouts/master', {
+                    header: 'empty',
+                    body: 'error',
+                    title: 'Guild fetch error',
+                    description: 'There was an error fetching the data for this guild. Try again later.'
+                });
             });
         });
     } 

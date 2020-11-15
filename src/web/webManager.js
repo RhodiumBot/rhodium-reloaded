@@ -88,5 +88,18 @@ app.use('/auth', require('./routes/auth.js'));   // Authorization pages
 app.use('/dash', require('./routes/dash.js'));   // Dashboard pages
 
 
+// Handle errors
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  console.log(err.message)
+  // render the error page
+  res.status(err.status || 500);
+  res.render('layouts/master', {
+    header: 'empty',
+    body: 'error',
+    title: err.status || 500,
+    description: err.message.split('\n')[err.message.split('\n').length-1]
+  });
+});
 
 module.exports = app;
