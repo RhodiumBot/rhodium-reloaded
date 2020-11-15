@@ -1,1 +1,58 @@
-Managed: <input type="checkbox" <%= db.managed ? 'checked' : '' %>>
+<div class="content-header">
+    <h4 style="margin-bottom: 0;">General</h4>
+    <span class="footnote">General settings which apply to this guild.</span>
+</div>
+
+<h5>Managed</h5>
+<input type="checkbox" title="Turns on or off all rhodium functions at once. Any settings will be saved." <%= db.managed ? 'checked' : '' %>><br><br><br>
+
+
+<div class="splitter">
+    <div class="splitted">
+
+        <h6>Rhodium Invite Manager</h6><br>
+        Vanity URL<br>
+        <span class="footnote">https://rhodium.li/invite/???</span>
+        <br><input type="text">
+        <div class="tooltip">
+            <svg style="z-index:7;margin-left:-30px;margin-bottom:2px;width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#767676" d="M11,18H13V16H11V18M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3Z" />
+            </svg>
+            <div class="tooltiptext">
+                Rhodium has it's own invite system which allows you to get your own Vanity URL.
+            </div>
+        </div><br><br>
+
+        Redirect Invite<br>
+        <span class="footnote">https://discord.gg/???</span>
+        <br><input type="text">
+        <div class="tooltip">
+            <svg style="z-index:7;margin-left:-30px;margin-bottom:2px;width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#767676" d="M11,18H13V16H11V18M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3Z" />
+            </svg>
+            <div class="tooltiptext">
+                The discord invite code Rhodium's guild page will redirect to. Leave blank to not show a join button.
+            </div>
+        </div><br><br>
+
+    </div>
+
+    <div class="splitted">
+
+        <h6>Guild Info</h6><br>
+        
+        Tagline<br>
+        <input type="text"><br><br>
+
+        Guild description<br>
+        <textarea></textarea>
+        <div class="tooltip">
+            <svg style="z-index:7;margin-left:-30px;margin-bottom:2px;width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#767676" d="M11,18H13V16H11V18M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3Z" />
+            </svg>
+            <div class="tooltiptext">
+                The description which will appear on your guild's invite page on Rhodium.
+            </div>
+        </div><br>
+    </div>
+</div>

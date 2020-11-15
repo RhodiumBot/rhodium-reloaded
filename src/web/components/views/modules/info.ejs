@@ -1,0 +1,46 @@
+<div class="content-header">
+    <h4 style="margin-bottom: 0;">Info</h4>
+    <span class="footnote">Statistics and numbers about this guild.</span>
+</div>
+
+<h5>General info</h5>
+<span class="footnote">Name</span> <%= guild.name %><br>
+<span class="footnote">Created</span> <%= guild.createdAt %>
+
+<br><br><br>
+<div class="splitter">
+    <div class="splitted">
+
+        <h6>Bare numbers</h6><br>
+        
+        <table>
+            <tr>
+                <td>Members</td>
+                <td><%= guild.memberCount %></td>
+            </tr>
+            <tr>
+                <td>Boosts</td>
+                <td><%= guild.premiumSubscriptionCount %></td>
+            </tr>
+            <tr>
+                <td>Boost Tier</td>
+                <td><%= guild.premiumTier %></td>
+            </tr>
+            <tr>
+                <td>Verification level</td>
+                <td><%= guild.verificationLevel %></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Rhodium Shard</td>
+                <td><%= guild.shardID %></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="splitted">
+    </div>
+</div>

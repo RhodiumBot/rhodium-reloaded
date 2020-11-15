@@ -1,1 +1,106 @@
-WELCOMER
+<div class="content-header">
+    <h4 style="margin-bottom: 0;">Welcomer</h4>
+    <span class="footnote">Sends a message into a channel and/or into new members' DMs on join.</span>
+</div>
+
+<div class="splitter">
+    <div class="splitted">
+        <h5>Guild</h5>
+        <input id="guild-enabled" <%= db.Welcomer.enabled ? 'checked' : '' %> type="checkbox" class="toggle" title="Whether or not to send join/leave messages into a channel on your guild."><br><br>
+        
+        Channel<br>
+        <select>
+            <option selected>#general</option>
+            <option>#memes</option>
+            <option>#degeneral</option>
+        </select><br><br>
+        
+        Welcome Message <br>
+        <textarea><%= db.Welcomer.messageJoin %></textarea>
+        <div class="tooltip">
+            <svg style="z-index:7;margin-left:-30px;margin-bottom:2px;width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#767676" d="M11,18H13V16H11V18M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3Z" />
+            </svg>
+            <div class="tooltiptext">
+                <h6>Placeholders</h6><br>
+                ::NAME::<br>
+                <span class="footnote">Will write out the user's name</span><br><br>
+
+                ::TAG::<br>
+                <span class="footnote">Will write out the user's tag</span><br><br>
+
+                ::ID::<br>
+                <span class="footnote">Will write out the user's ID</span><br><br>
+
+                ::CREATED::<br>
+                <span class="footnote">Will write out when the user's account was created</span><br><br>
+
+                ::MENT::<br>
+                <span class="footnote">Will mention the user</span><br><br>
+
+                ::COUNT::<br>
+                <span class="footnote">Will write out the guild's member count</span><br><br>
+
+                ::GUILD::<br>
+                <span class="footnote">Will write out the guild's name</span>
+            </div>
+        </div><br><br>
+        
+        Leave message<br>
+        <textarea><%= db.Welcomer.messageLeave %></textarea>
+        <div class="tooltip">
+            <svg style="z-index:7;margin-left:-30px;margin-bottom:2px;width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#767676" d="M11,18H13V16H11V18M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3Z" />
+            </svg>
+            <div class="tooltiptext">
+                <h6>Placeholders</h6><br>
+                ::NAME::<br>
+                <span class="footnote">Will write out the user's name</span><br><br>
+
+                ::TAG::<br>
+                <span class="footnote">Will write out the user's tag</span><br><br>
+
+                ::ID::<br>
+                <span class="footnote">Will write out the user's ID</span><br><br>
+
+                ::COUNT::<br>
+                <span class="footnote">Will write out the guild's member count</span><br><br>
+
+                ::GUILD::<br>
+                <span class="footnote">Will write out the guild's name</span>
+            </div>
+        </div><br><br>
+    </div>
+    <div class="splitted">
+        <h5>Private</h5>
+        <input <%= db.Welcomer.enabledPrivate ? 'checked' : '' %> type="checkbox" title="Whether or not to send a welcome DM to a new member."><br><br>
+        
+        Welcome Message<br>
+        <textarea><%= db.Welcomer.messagePrivate %></textarea>
+        <div class="tooltip">
+            <svg style="z-index:7;margin-left:-30px;margin-bottom:2px;width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="#767676" d="M11,18H13V16H11V18M12,6A4,4 0 0,0 8,10H10A2,2 0 0,1 12,8A2,2 0 0,1 14,10C14,12 11,11.75 11,15H13C13,12.75 16,12.5 16,10A4,4 0 0,0 12,6M5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3Z" />
+            </svg>
+            <div style="left:-30em;" class="tooltiptext">
+                <h6>Placeholders</h6><br>
+                ::NAME::<br>
+                <span class="footnote">Will write out the user's name</span><br><br>
+
+                ::TAG::<br>
+                <span class="footnote">Will write out the user's tag</span><br><br>
+
+                ::ID::<br>
+                <span class="footnote">Will write out the user's ID</span><br><br>
+
+                ::CREATED::<br>
+                <span class="footnote">Will write out when the user's account was created</span><br><br>
+
+                ::COUNT::<br>
+                <span class="footnote">Will write out the guild's member count</span><br><br>
+
+                ::GUILD::<br>
+                <span class="footnote">Will write out the guild's name</span>
+            </div>
+        </div><br>
+    </div>
+</div>

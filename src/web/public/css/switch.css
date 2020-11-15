@@ -1,0 +1,157 @@
+input[type="checkbox"]{
+    width:8em;
+    height:2em;
+    appearance: none;
+    cursor: pointer;
+    margin-top: 1em;
+}
+input[type="checkbox"]:focus{
+    outline: none;
+}
+input[type="checkbox"]::before{
+    border: .4em solid #1F1E24;
+    border-right-width: 0;
+    content: 'ON';
+    background: #1F1E24;
+    font-family: var(--font-body);
+    color: white;
+    padding: .5em 1em;
+    font-weight: 600;
+    transition: .2s ease;
+}
+input[type="checkbox"]::after{
+    border: .4em solid #1F1E24;
+    border-left-width: 0;
+    content: 'OFF';
+    background: var(--accent);
+    color: white;
+    font-family: var(--font-body);
+    color: black;
+    font-weight: 600;
+    padding: .5em 1em;
+    transition: .2s ease;
+}
+input[type="checkbox"]:checked::before{
+    content: 'ON';
+    background: var(--accent);
+    color: black;
+}
+input[type="checkbox"]:checked::after{
+    content: 'OFF';
+    background: #1F1E24;
+    color: white;
+}
+
+textarea{
+    max-width: 100%;
+    width:20em;
+    height:8em;
+    background: #1F1E24;
+    border:none;
+    resize: none;
+    margin-top: .5em;
+    font-family: var(--font-body);
+    color: white;
+    padding: 1em;
+    box-sizing: border-box;
+}
+textarea:focus{
+    outline: none;
+}
+
+input[type="text"]{
+    height:3em;
+    width:20em;
+    background: #1F1E24;
+    font-family: var(--font-body);
+    color: white;
+    border:none;
+    margin-top: .5em;
+    box-sizing: border-box;
+    padding-left: 1em;
+    background: #1F1E24;
+}
+input[type="text"]{
+    outline: none;
+}
+
+
+select{
+    height:3em;
+    width:20em;
+    background: #1F1E24;
+    font-family: var(--font-body);
+    color: white;
+    border:none;
+    margin-top: .5em;
+    box-sizing: border-box;
+    padding-left: 1em;
+    
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg height='24' width='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path fill='white' d='M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z' /></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 97%;
+  background-position-y: center;
+    background-color: #1F1E24;
+    cursor: pointer;
+}
+select:focus{
+    outline: none;
+}
+
+option{
+    background: #1F1E24;
+    font-family: var(--font-body);
+}
+
+/*skidded from w3schools yes*/
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Tooltip text */
+  .tooltip .tooltiptext {
+      visibility: hidden;
+    background: #1F1E24;
+    color: #fff;
+    text-align: center;
+    padding: 1em 1.5em;
+    min-width:20em;
+   
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    top: -15em;
+    left: 1em;
+    box-shadow: 0px 6px 20px rgba(0,0,0,.35);
+  }
+  
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .tooltip:hover .tooltiptext {
+      visibility: visible;
+      animation: blendIn .2s ease;
+  }
+
+@keyframes blendIn{
+    0%{
+        left:0em;
+        opacity: 0;
+    }
+    100%{
+        left:1em;
+        opacity: 1;
+    }
+}
+
+td{
+    padding-right:1em;
+}
+td:nth-child(1){
+    color: #888;
+    font-size: .9em;
+    font-weight: 500;
+}

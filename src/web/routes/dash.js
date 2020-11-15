@@ -63,8 +63,9 @@ router.get('/guild/*/*', (req, res) => {
     if(guild){
         client.db.models.Guild.findOne({
             where:{
-                id: guild.id
-            }
+                id: guild.id,
+            },
+            include: client.db.models.Welcomer
         }).then(db => {
             return res.render('layouts/master', {
                 header: 'dash',
@@ -105,7 +106,7 @@ router.get('/guild/*', (req, res) => {
                 body: 'dash/guild',
                 guild,
                 db,
-                settings: 'general'
+                settings: 'info'
             });
         }).catch(err => {
             res.render('layouts/master', {
