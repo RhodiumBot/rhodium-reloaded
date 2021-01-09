@@ -251,6 +251,17 @@ h6{ font-size: 1.5em }
     background: var(--accent);
     color: black;
 }
+
+.sidebar-element svg.arrow{
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: .1s ease;
+}
+.sidebar-element:hover svg.arrow, .sidebar-element.selected svg.arrow{
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .sidebar-icon{
     width:20px;
     height:20px;
@@ -300,4 +311,21 @@ h6{ font-size: 1.5em }
 
 .splitted{
     flex: 1;
+}
+
+.save-button{
+    width: 12em;
+    height:6em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.save-button div{
+    flex-direction: column;
 }

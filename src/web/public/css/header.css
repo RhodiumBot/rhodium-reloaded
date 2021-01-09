@@ -25,7 +25,7 @@
 
 .header-element{
     box-sizing: border-box;
-    border-bottom: 2px solid transparent;
+    border: 2px solid transparent;
     width: auto;
     height: 3em;
     transition: .1s ease;
@@ -33,6 +33,7 @@
     padding-left: 2em;
     padding-right: 2em;
     line-height: 3em;
+    margin: 10px;
 }
 
 .header-element.big{
@@ -48,8 +49,8 @@
 }
 
 .header-element:hover{
-    border-bottom: 2px solid var(--background-primary);
+    border: 2px solid var(--background-primary);
 }
 .header.scrolled .header-element:hover{
-    border-bottom: 2px solid white;
+    border: 2px solid white;
 }

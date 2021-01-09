@@ -14,14 +14,12 @@ module.exports = client => {
       logging: log => client.log.db(log)
     });
 
-    try {
-        sequelize.authenticate().then( () => {
-            client.log.log('Database connection success');
-        });
-    } catch (error) {
+    sequelize.authenticate().then( () => {
+        client.log.log('Database connection success');
+    }).catch(error => {
         client.log.err('Database connection failed. See below for details');
         throw error;
-    }
+    });
 
 
     // Define Models
