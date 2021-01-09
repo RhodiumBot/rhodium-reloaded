@@ -140,8 +140,8 @@ router.get('/guild/*', (req, res) => {
                     guild,
                     db,
                     member,
-                    modules,
-                    settings: 'info'
+                    settings: 'info',
+                    modules
                 });
             }).catch(err => {
                 res.render('layouts/master', {
